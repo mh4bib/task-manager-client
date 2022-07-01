@@ -8,7 +8,7 @@ const Calendar = () => {
         <div className=' mx-auto'>
             <h1 className='mt-4 text-2xl font-semibold'>Calendar</h1>
             <DayPicker 
-            className='bg-blue-200 inline-block my-6 p-4 rounded-lg'
+            className='bg-gradient-to-r from-primary to-secondary inline-block my-6 p-4 rounded-lg'
             selected={selected}
             />
         </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 
 const CompletedTasks = () => {
-    const { data, isLoading } = useQuery(['tasks'], () => fetch('https://rocky-mesa-15575.herokuapp.com/checked-tasks')
+    const { data, isLoading } = useQuery(['tasks'], () => fetch('http://localhost:5000/checked-tasks')
         .then(res => res.json())
     )
 
@@ -15,7 +15,7 @@ const CompletedTasks = () => {
             {
                 data.map(task => <div
                     key={task._id}
-                    className='bg-blue-300 my-2 text-left p-6 rounded-lg'
+                    className='bg-gradient-to-r from-primary to-secondary my-2 text-left p-6 rounded-lg'
                 ><span className='flex' style={{ textDecoration: task?.checked ? "line-through" : "none" }}><input type="checkbox" checked={task?.checked} className="checkbox mr-2" />{task.task} </span></div>)
             }
         </div>
