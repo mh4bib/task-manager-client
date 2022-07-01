@@ -12,7 +12,7 @@ const Home = () => {
             const newTask = { task };
             console.log(newTask);
 
-            const url = 'http://localhost:5000/tasks';
+            const url = 'https://rocky-mesa-15575.herokuapp.com/tasks';
             fetch(url, {
                 method: 'POST',
                 headers: {
@@ -39,7 +39,7 @@ const Home = () => {
         event.preventDefault();
         const task = event.target.name.value;
         const updatedTask = { task }
-        const url = `http://localhost:5000/tasks/${ids}`;
+        const url = `https://rocky-mesa-15575.herokuapp.com/tasks/${ids}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -78,7 +78,7 @@ const Home = () => {
     }, []);
 
     // fetching tasks 
-    const { data, isLoading, refetch } = useQuery(['tasks'], () => fetch('http://localhost:5000/tasks')
+    const { data, isLoading, refetch } = useQuery(['tasks'], () => fetch('https://rocky-mesa-15575.herokuapp.com/tasks')
         .then(res => res.json())
     )
 
@@ -89,7 +89,7 @@ const Home = () => {
 
 
     const handleCheck = _id => {
-        fetch(`http://localhost:5000/tasks/${_id}`, {
+        fetch(`https://rocky-mesa-15575.herokuapp.com/tasks/${_id}`, {
             method: 'PATCH',
             // headers: {
             //     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
