@@ -18,7 +18,7 @@ function App() {
         <Route path='/completed-tasks' element={<CompletedTasks></CompletedTasks>}></Route>
         <Route path='/calendar' element={<Calendar></Calendar>}></Route>
       </Routes>
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </div>
   );
 }

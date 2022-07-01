@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 
 const ToDo = () => {
-    const { data, isLoading, refetch } = useQuery(['tasks'], () => fetch('http://localhost:5000/tasks')
+    const { data, isLoading, refetch } = useQuery(['tasks'], () => fetch('https://rocky-mesa-15575.herokuapp.com/tasks')
         .then(res => res.json())
     )
 
@@ -11,7 +11,7 @@ const ToDo = () => {
     }
 
     const handleCheck = _id => {
-        fetch(`http://localhost:5000/tasks/${_id}`, {
+        fetch(`https://rocky-mesa-15575.herokuapp.com/tasks/${_id}`, {
             method: 'PATCH',
             // headers: {
             //     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -24,10 +24,13 @@ const ToDo = () => {
             })
     }
     return (
-        <div>
-            <h1>here will be the todo list</h1>
+        <div className='mx-4 md:mx-auto w-12/12 md:w-6/12'>
+            <h1 className='mt-4 text-2xl font-semibold'>All Task</h1>
             {
-                data.map(task => <p style={{textDecoration: task?.checked ? "line-through" : "none" }}>{task.task} <input type="checkbox" checked={task?.checked} onClick={()=>handleCheck(task._id)} class="checkbox" /></p>)
+                data.map(task => <div
+                    key={task._id}
+                    className='bg-blue-300 my-2 text-left p-6 rounded-lg'
+                ><span className='flex' style={{ textDecoration: task?.checked ? "line-through" : "none" }}><input type="checkbox" checked={task?.checked} onClick={() => handleCheck(task._id)} className="checkbox mr-2" />{task.task} </span></div>)
             }
         </div>
     );
