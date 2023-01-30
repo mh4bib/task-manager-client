@@ -5,7 +5,7 @@ const ToDo = () => {
     const [isEdit, setIsEdit] = useState(false);
     const [isTask, setTask] = useState('');
     const [ids, setIds] = useState('');
-    const { data, isLoading, refetch } = useQuery(['tasks'], () => fetch('https://rocky-mesa-15575.herokuapp.com/tasks')
+    const { data, isLoading, refetch } = useQuery(['tasks'], () => fetch('https://task-manager-server-sw6c.onrender.com/tasks')
         .then(res => res.json())
     )
 
@@ -14,7 +14,7 @@ const ToDo = () => {
     }
 
     const handleCheck = _id => {
-        fetch(`https://rocky-mesa-15575.herokuapp.com/tasks/${_id}`, {
+        fetch(`https://task-manager-server-sw6c.onrender.com/tasks/${_id}`, {
             method: 'PATCH',
             // headers: {
             //     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -38,7 +38,7 @@ const ToDo = () => {
         event.preventDefault();
         const task = event.target.name.value;
         const updatedTask = { task }
-        const url = `https://rocky-mesa-15575.herokuapp.com/tasks/${ids}`;
+        const url = `https://task-manager-server-sw6c.onrender.com/tasks/${ids}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -59,7 +59,9 @@ const ToDo = () => {
         <div className='mx-4 md:mx-auto w-12/12 md:w-6/12'>
             <h1 className='mt-4 text-2xl font-semibold'>All Task</h1>
             {
-                data.map(task => <div
+                data.slice(0)
+                .reverse()
+                .map(task => <div
                     key={task._id}
                     className='bg-gradient-to-r from-primary to-secondary my-2 text-left p-6 rounded-lg flex justify-between'
                 >

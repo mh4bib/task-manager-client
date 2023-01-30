@@ -12,7 +12,7 @@ const Home = () => {
             const newTask = { task };
             console.log(newTask);
 
-            const url = 'https://rocky-mesa-15575.herokuapp.com/tasks';
+            const url = 'https://task-manager-server-sw6c.onrender.com/tasks';
             fetch(url, {
                 method: 'POST',
                 headers: {
@@ -25,6 +25,7 @@ const Home = () => {
                     refetch();
                     console.log(result);
                 })
+                tasks.target.value = "";
         }
 
     }
@@ -39,7 +40,7 @@ const Home = () => {
         event.preventDefault();
         const task = event.target.name.value;
         const updatedTask = { task }
-        const url = `https://rocky-mesa-15575.herokuapp.com/tasks/${ids}`;
+        const url = `https://task-manager-server-sw6c.onrender.com/tasks/${ids}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -78,7 +79,7 @@ const Home = () => {
     }, []);
 
     // fetching tasks 
-    const { data, isLoading, refetch } = useQuery(['tasks'], () => fetch('https://rocky-mesa-15575.herokuapp.com/tasks')
+    const { data, isLoading, refetch } = useQuery(['tasks'], () => fetch('https://task-manager-server-sw6c.onrender.com/tasks')
         .then(res => res.json())
     )
 
@@ -89,7 +90,7 @@ const Home = () => {
 
 
     const handleCheck = _id => {
-        fetch(`https://rocky-mesa-15575.herokuapp.com/tasks/${_id}`, {
+        fetch(`https://task-manager-server-sw6c.onrender.com/tasks/${_id}`, {
             method: 'PATCH',
             // headers: {
             //     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -115,30 +116,18 @@ const Home = () => {
                             <label className="label mx-auto">
                                 <span className="label-text text-2xl">New Task</span>
                             </label>
-                            <input type="text" className="input input-bordered bg-[#f0ece3] mb-[15px]" />
+                            <input type="text" placeholder='Press enter to add a new task' className="input input-bordered bg-[#F7F5F2] mb-[15px]" />
 
                         </form>
                     }
-                    {/* {
-                        isEdit &&
-                        <form onSubmit={handleUpdate} className='flex flex-col'>
-                            <label className="label mx-auto">
-                                <span className="label-text text-2xl">Edit Task</span>
-                            </label>
-                            <input type="text" name='name' className="input input-bordered mb-[15px]" defaultValue={isTask} />
-                            <input type="submit" value="update" className='button' />
-                        </form>
-                    } */}
-                    {/* <form onSubmit={handleAdd} className='flex flex-col'>
-                        <label className="label mx-auto">
-                            <span className="label-text text-2xl">New Task</span>
-                        </label>
-                        <input type="text" className="input input-bordered mb-[15px]" />
-                    </form> */}
+                    
                 </div>
                 <div className='shadow-lg p-4'>
+                    <p className=' text-left'>Recently added</p>
                     {
-                        data.map(task => <div
+                        data.slice(-5)
+                        .reverse()
+                        .map(task => <div
                             key={task._id}
                             className='bg-gradient-to-r from-primary to-secondary my-2 text-left p-6 rounded-lg flex justify-between'
                         ><span

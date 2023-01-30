@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 
 const CompletedTasks = () => {
-    const { data, isLoading } = useQuery(['tasks'], () => fetch('https://rocky-mesa-15575.herokuapp.com/checked-tasks')
+    const { data, isLoading } = useQuery(['tasks'], () => fetch('https://task-manager-server-sw6c.onrender.com/checked-tasks')
         .then(res => res.json())
     )
 
